@@ -1,0 +1,50 @@
+<h1>New photo</h1>
+
+
+
+
+<%= form_for @photo do |f| %>
+    <% if @photo.errors.any? %>
+        <div id="errors_full_text" class="bg-warning">
+          <h2>Found these errors when saving:</h2>
+          <ul>
+            <% @photo.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class="section" id="step1">
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: 'form-control', required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :collection %>
+        <%=select_tag "collection", options_from_collection_for_select(@collections, "id", "name") %>
+      </div>
+      <div class="form-group">
+        <%= f.label :image %>
+        <%= f.file_field :image, required: true %>
+      </div>
+    </div>
+    <div class="section" id="step2">
+      <h2>Select a Category for your images</h2>
+      <div class="form-group">
+        <%= f.label :category %>
+        <%=select_tag "category", options_from_collection_for_select(@categories, "id", "name") %>
+      </div>
+    </div>
+    <div class="section" id="step2">
+      <h2>Name this Monument</h2>
+      <div class="form-group">
+        <label for="monument_name" >Monument Name</label>
+        <input type="text" name="monument_name" class="form-control" required />
+      </div>
+    </div>
+
+
+
+
+    <%= f.submit 'Submit', class: 'btn btn-primary btn-lg' %>
+<% end %>

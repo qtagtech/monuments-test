@@ -1,0 +1,15 @@
+<h1>These are your Photos</h1>
+
+<%= link_to 'Add a new Photo', new_photo_path, class: 'btn btn-lg btn-primary' %>
+<%= link_to 'Add a new Collection', new_collection_path, class: 'btn btn-lg btn-primary' %>
+<%= link_to 'Add a new Category', new_category_path, class: 'btn btn-lg btn-primary' %>
+
+<ul class="row" id="photos-list">
+  <% @photos.each do |photo| %>
+      <li class="col-xs-3">
+        <%= link_to image_tag(photo.image.remote_url, alt: photo.title, class: 'img-thumbnail'),
+                    photo.image.remote_url, target: '_blank' %>
+        <p><%= photo.title %></p>
+      </li>
+  <% end %>
+</ul>
