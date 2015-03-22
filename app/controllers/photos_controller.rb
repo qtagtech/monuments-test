@@ -20,19 +20,22 @@ class PhotosController < ApplicationController
     @monument.save
     @photo.monument = @monument
     @photo.collection = @collection
-    if @photo.save
-      @category.photos << @photo
-      flash[:success] = "Photo saved!"
-      redirect_to photos_path
-    else
-      render 'new'
-    end
+
+      if @photo.save
+         @category.photos << @photo
+         flash[:success] = "Photo saved!"
+         redirect_to photos_path
+       else
+         render 'new'
+       end
+
+
   end
 
   private
 
   def photo_params
-    params.require(:photo).permit(:image, :title)
+    params.require(:photo).permit(:image, :title,:collection,:category)
   end
 
   def set_collection
